@@ -8,18 +8,22 @@ const FGColor = document.getElementById("FGColor");
 let QR_Code;
 let sizeChoice, BGColorChoice, FGColorChoice;
 
+//Set size
 sizeOptions.addEventListener("click", () => {
   sizeChoice = sizeOptions.value;
 });
 
+//Set background color
 BGColor.addEventListener("input", () => {
   BGColorChoice = BGColor.value;
 });
 
+//Set foreground color
 FGColor.addEventListener("input", () => {
   FGColorChoice = FGColor.value;
 });
 
+//Format input
 const inputFormatter = (value) => {
   value = value.replace(/[^a-z0-9A-Z]+/g, "");
   return value;
@@ -27,7 +31,7 @@ const inputFormatter = (value) => {
 
 submitBtn.addEventListener("click", async () => {
   container.innerHTML = "";
-  
+  //QR code genertion
   QR_Code = await new QRCode(container, {
     text: userInput.value,
     width: sizeChoice,
@@ -36,6 +40,7 @@ submitBtn.addEventListener("click", async () => {
     colorLight: BGColorChoice,
   });
 
+  //Set url for download
   const src = container.firstChild.toDataURL("image/pmg");
   downloadBtn.href = src;
   let userValue = userInput.value;
@@ -68,3 +73,4 @@ window.onload = () => {
   downloadBtn.classList.add("hide");
   submitBtn.disabled = true;
 };
+
